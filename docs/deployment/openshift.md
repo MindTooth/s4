@@ -41,6 +41,7 @@ oc get route s4 -o jsonpath='{.spec.host}'
 ```
 
 ## Quick Start (Raw Manifests)
+> **Note:** Authentication is enabled by default.
 
 ```bash
 # Login to OpenShift
@@ -157,6 +158,7 @@ oc policy add-role-to-user edit <username> -n s4
 ```
 
 ### Deploy from Manifests (Legacy)
+> **Note:** Authentication is enabled by default.
 
 ```bash
 # Deploy all resources
