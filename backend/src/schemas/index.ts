@@ -198,6 +198,91 @@ export const conflictCheckRequestSchema = {
   },
 };
 
+// ========== Notification Schemas ==========
+
+const bucketNameParam = {
+  type: 'string',
+  minLength: 3,
+  maxLength: 63,
+  pattern: '^[a-z0-9][a-z0-9-]*[a-z0-9]$',
+};
+
+export const getNotificationsSchema = {
+  params: {
+    type: 'object',
+    required: ['bucketName'],
+    properties: {
+      bucketName: bucketNameParam,
+    },
+  },
+};
+
+export const deleteNotificationSchema = {
+  params: {
+    type: 'object',
+    required: ['bucketName', 'notificationId'],
+    properties: {
+      bucketName: bucketNameParam,
+      notificationId: { type: 'string', minLength: 1 },
+    },
+  },
+};
+
+export const putNotificationsSchema = {
+  params: {
+    type: 'object',
+    required: ['bucketName'],
+    properties: {
+      bucketName: bucketNameParam,
+    },
+  },
+  body: {
+    type: 'object',
+    required: ['notifications'],
+    properties: {
+      notifications: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['endpoint', 'events'],
+          properties: {
+            id: { type: 'string' },
+            endpoint: {
+              type: 'string',
+              pattern: '^https?://.+',
+              minLength: 1,
+            },
+            events: {
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'string',
+                enum: ['s3:ObjectCreated:*', 's3:ObjectRemoved:*'],
+              },
+            },
+            prefix: { type: 'string' },
+            suffix: { type: 'string' },
+          },
+        },
+      },
+    },
+  },
+};
+
+export const testEndpointSchema = {
+  body: {
+    type: 'object',
+    required: ['endpoint'],
+    properties: {
+      endpoint: {
+        type: 'string',
+        pattern: '^https?://.+',
+        minLength: 1,
+      },
+    },
+  },
+};
+
 // ========== Object Metadata/Tagging Schemas ==========
 
 export const putObjectTagsSchema = {

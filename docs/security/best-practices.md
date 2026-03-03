@@ -472,9 +472,9 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: encrypted-storage
-provisioner: your-csi-driver       # Use your cluster's CSI driver
+provisioner: your-csi-driver # Use your cluster's CSI driver
 parameters:
-  encrypted: 'true'                # Provider-specific encryption parameter
+  encrypted: 'true' # Provider-specific encryption parameter
 ```
 
 > **Note**: The `provisioner` and `parameters` depend on your cluster's storage backend (e.g., AWS EBS, Azure Disk, GCP PD, Ceph, etc.). Consult your provider's documentation for the correct values.

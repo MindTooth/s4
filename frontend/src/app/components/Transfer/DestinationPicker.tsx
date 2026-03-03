@@ -47,7 +47,6 @@ export const DestinationPicker: React.FC<DestinationPickerProps> = ({ isOpen, on
   const [newFolderName, setNewFolderName] = React.useState('');
   const [newFolderNameRulesVisibility, setNewFolderNameRulesVisibility] = React.useState(false);
 
-
   // Note: Storage locations are loaded by useStorageLocations hook
 
   // Load directories when location or path changes

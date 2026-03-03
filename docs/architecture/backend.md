@@ -8,6 +8,7 @@ The S4 backend is a TypeScript-based Fastify application that provides a RESTful
 - **Runtime**: Node.js 18+
 - **Language**: TypeScript
 - **S3 Client**: AWS SDK v3
+- **Notifications**: Filesystem watching with webhook dispatch
 - **Authentication**: JWT (jsonwebtoken)
 - **Validation**: Fastify JSON Schema
 - **Logging**: Pino (Fastify's built-in logger)
@@ -141,6 +142,7 @@ backend/
 │   │   ├── auth/             # Authentication (info, login, logout, me, sse-ticket)
 │   │   ├── buckets/          # Bucket operations (list, create, delete)
 │   │   ├── objects/          # Object operations (upload, download, list, delete, view)
+│   │   ├── notifications/    # Bucket notification management (webhooks)
 │   │   ├── transfer/         # Transfer operations (create, progress, cancel, cleanup)
 │   │   ├── settings/         # Configuration (S3, HuggingFace, proxy, limits)
 │   │   ├── local/            # Local storage operations
@@ -159,6 +161,9 @@ backend/
 │   │   ├── httpStatus.ts     # HTTP status constants
 │   │   ├── transferQueue.ts  # Transfer job management
 │   │   ├── sseTickets.ts     # SSE ticket generation
+│   │   ├── notificationStore.ts # Notification config persistence
+│   │   ├── bucketWatcher.ts    # Filesystem watcher for bucket events
+│   │   ├── webhookDispatcher.ts # Webhook dispatch for notifications
 │   │   └── ...               # Other utilities
 │   │
 │   ├── types.ts              # TypeScript type definitions
@@ -198,6 +203,13 @@ Routes are organized under `/api/*` and auto-loaded from `src/routes/api/`:
 - `DELETE /:bucketName/:encodedKey` - Delete object or folder
 - `GET /view/:bucketName/:encodedKey` - View object metadata and content preview
 - `POST /huggingface-import` - Import model from HuggingFace
+
+### Notification Routes (`/api/notifications`)
+
+- `GET /:bucketName` - Get notification configurations for a bucket
+- `PUT /:bucketName` - Set notification configurations (starts filesystem watcher)
+- `DELETE /:bucketName/:notificationId` - Remove a single notification (stops watcher if none remain)
+- `POST /test-endpoint` - Test an HTTP endpoint by sending a sample S3 event
 
 ### Transfer Routes (`/api/transfer`)
 

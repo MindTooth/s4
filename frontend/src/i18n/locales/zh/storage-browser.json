@@ -224,7 +224,8 @@
     "viewFile": "查看此文件。",
     "downloadFile": "下载此文件。",
     "viewDetails": "查看文件详情和标签。",
-    "deleteFile": "删除此文件。"
+    "deleteFile": "删除此文件。",
+    "deleteFolder": "删除此文件夹。"
   },
   "pagination": {
     "loadMore": "加载更多",

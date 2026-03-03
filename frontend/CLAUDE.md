@@ -453,7 +453,7 @@ Main components in `src/app/components/`:
 - **Login** - Login form component
 - **ProtectedRoute** - HOC for protecting routes (requires authentication)
 - **StorageBrowser** - Unified storage browser for S3 and local storage with upload/download
-- **Buckets** - S3 bucket management
+- **Buckets** - S3 bucket management (includes BucketNotificationsModal for webhook configuration)
 - **Settings** - S3 connection configuration
 - **DocumentRenderer** - Markdown/document viewer
 - **ResponsiveTable** - Responsive table wrapper with mobile card view

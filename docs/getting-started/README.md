@@ -19,6 +19,7 @@ Perfect for POCs, development environments, demos, and simple deployments where 
 - ✅ Object operations (upload, download, delete, browse)
 - ✅ Local filesystem/PVC browsing
 - ✅ Cross-storage file transfers (S3 ↔ Local)
+- ✅ Bucket notifications via webhooks
 - ✅ HuggingFace model import
 - ✅ Single container deployment
 - ✅ Persistent storage with SQLite

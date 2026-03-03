@@ -224,6 +224,99 @@ The storage management view shows:
 
 ---
 
+## Bucket Notifications
+
+S4 supports webhook-based bucket notifications. When objects are created, modified, or deleted in a bucket, S4 can send HTTP POST requests to configured webhook endpoints with S3-compatible event payloads.
+
+### Use Cases
+
+- **CI/CD triggers** - Automatically start builds or deployments when new artifacts are uploaded
+- **Monitoring** - Track object changes for audit or compliance purposes
+- **Data processing pipelines** - Trigger downstream processing when new data arrives
+
+### Setting Up Notifications via the UI
+
+1. Navigate to **Storage Management**
+2. Click the **notification bell icon** on the bucket you want to configure
+3. The **Bucket Notifications** modal opens
+4. Click **Add Notification** and fill in the form:
+
+| Field              | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| **Endpoint URL**   | HTTP or HTTPS URL that will receive webhook POST requests                   |
+| **Event Types**    | Select which events trigger notifications (created, removed, or both)       |
+| **Prefix Filter**  | (Optional) Only trigger for object keys starting with this string           |
+| **Suffix Filter**  | (Optional) Only trigger for object keys ending with this string             |
+
+5. Click **Save** to apply the notification configuration
+
+### Testing a Webhook Endpoint
+
+Before saving, you can verify your endpoint is reachable:
+
+1. Enter the endpoint URL
+2. Click **Test Endpoint**
+3. S4 sends a sample `s3:TestEvent` to the URL
+4. A success or failure message is displayed with the HTTP status code
+
+### Webhook Payload Format
+
+When an event occurs, S4 sends a JSON payload matching the AWS S3 notification format:
+
+```json
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "eventName": "s3:ObjectCreated:Put",
+      "eventTime": "2024-02-19T10:30:45.123Z",
+      "s3": {
+        "bucket": { "name": "my-bucket" },
+        "object": { "key": "path/to/file.txt", "size": 1024 }
+      }
+    }
+  ]
+}
+```
+
+### Event Types
+
+| Event Pattern           | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `s3:ObjectCreated:*`    | Matches all object creation events                 |
+| `s3:ObjectCreated:Put`  | Object was created or overwritten                  |
+| `s3:ObjectRemoved:*`    | Matches all object removal events                  |
+| `s3:ObjectRemoved:Delete` | Object was deleted                               |
+| `s3:TestEvent`          | Sent when using the Test Endpoint feature          |
+
+### Prefix and Suffix Filtering
+
+Filters let you narrow which objects trigger notifications:
+
+- **Prefix**: `images/` - Only objects whose keys start with `images/`
+- **Suffix**: `.csv` - Only objects whose keys end with `.csv`
+- **Both**: Prefix `data/` and suffix `.json` - Only JSON files under the `data/` path
+
+When both filters are set, an object must match **both** to trigger a notification.
+
+### Managing Existing Notifications
+
+- **View**: Open the notification modal to see all configured notifications for a bucket
+- **Delete**: Click the delete icon next to a notification to remove it
+
+### Important Notes
+
+- **Fire-and-forget delivery** - Webhooks are dispatched asynchronously; S4 does not wait for a response before continuing
+- **5-second timeout** - If an endpoint does not respond within 5 seconds, the request is abandoned
+- **No retries** - Failed webhook deliveries are not retried
+- **200ms debounce** - Rapid filesystem changes are debounced to avoid duplicate notifications
+- **Persistence** - Notification configurations are stored in a JSON file and survive restarts
+- **Auto-cleanup** - When a bucket is deleted, its notification configurations are automatically removed
+- **Dotfiles ignored** - Changes to files starting with `.` (hidden files, editor temp files) do not trigger notifications
+
+---
+
 ## Settings
 
 The Settings page allows you to configure S4's connections and behavior.
@@ -446,6 +539,14 @@ When importing models:
 - Check for sufficient disk space at the destination
 - Review conflict resolution settings
 
+**Notification webhooks not firing**:
+
+- Verify the webhook endpoint URL is reachable from S4 using the **Test Endpoint** button
+- Check that the correct event types are selected (created, removed, or both)
+- Review prefix/suffix filters to ensure they match your object keys
+- Confirm the bucket directory exists on disk (notifications use filesystem watching)
+- Check S4 logs for webhook dispatch errors
+
 For more detailed troubleshooting, see the [Troubleshooting Guide](../operations/troubleshooting.md).
 
 ---
@@ -456,4 +557,5 @@ For more detailed troubleshooting, see the [Troubleshooting Guide](../operations
 - [Error Reference](../operations/error-reference.md) - Complete error message reference
 - [FAQ](../operations/faq.md) - Frequently asked questions
 - [Configuration Guide](../deployment/configuration.md) - Environment variable reference
+- [Notifications API](../api/notifications.md) - Notification webhook API reference
 - [API Reference](../api/README.md) - Backend API documentation

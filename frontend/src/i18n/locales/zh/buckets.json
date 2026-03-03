@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "无效的 bucket 名称",
     "invalidNameMessage": "Bucket 名称 {{bucketName}} 无效。请检查规则后重试。"
+  },
+  "notifications": {
+    "title": "Bucket 通知",
+    "description": "为此 bucket 中的事件配置 Webhook 通知。",
+    "emptyState": {
+      "title": "未配置通知",
+      "description": "添加通知以在此 bucket 中创建或删除对象时接收 Webhook 事件。"
+    },
+    "table": {
+      "endpoint": "端点 URL",
+      "events": "事件",
+      "filters": "过滤器",
+      "actions": "操作"
+    },
+    "form": {
+      "addTitle": "添加通知",
+      "endpointLabel": "端点 URL",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "将接收事件通知的 HTTP 或 HTTPS URL",
+      "eventsLabel": "事件",
+      "objectCreated": "对象已创建",
+      "objectRemoved": "对象已删除",
+      "prefixLabel": "键前缀过滤器",
+      "prefixPlaceholder": "例如 uploads/",
+      "suffixLabel": "键后缀过滤器",
+      "suffixPlaceholder": "例如 .jpg",
+      "addButton": "添加通知",
+      "testButton": "测试端点",
+      "editTitle": "编辑通知",
+      "saveButton": "保存更改",
+      "cancelButton": "取消编辑"
+    },
+    "deleteConfirm": {
+      "title": "删除通知？",
+      "message": "这将停止向此端点发送事件。"
+    },
+    "success": {
+      "created": "通知已添加",
+      "createdMessage": "通知配置已成功更新。",
+      "deleted": "通知已删除",
+      "deletedMessage": "通知已成功删除。",
+      "updated": "通知已更新",
+      "updatedMessage": "通知已成功更新。",
+      "testSuccess": "端点可达",
+      "testSuccessMessage": "端点响应状态为 {{statusCode}}。"
+    },
+    "error": {
+      "loadFailed": "加载通知失败",
+      "saveFailed": "保存通知失败",
+      "deleteFailed": "删除通知失败",
+      "testFailed": "端点不可达",
+      "testFailedMessage": "无法到达端点：{{message}}",
+      "endpointRequired": "端点 URL 为必填项",
+      "endpointInvalid": "端点必须以 http:// 或 https:// 开头",
+      "eventsRequired": "至少需要选择一个事件类型"
+    },
+    "actions": {
+      "notifications": "通知"
+    }
+  },
+  "tooltips": {
+    "notifications": "管理存储桶通知。",
+    "deleteBucket": "删除此存储桶。",
+    "editNotification": "编辑此通知。",
+    "deleteNotification": "删除此通知。"
   }
 }

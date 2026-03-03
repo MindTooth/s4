@@ -9,5 +9,6 @@ rgw_posix_tmp_path = /var/lib/ceph/radosgw/tmp
 
 admin socket = /var/lib/ceph/radosgw/ceph-$cluster-$name.asok
 
+rgw_enable_apis = s3, s3website, sts, sns, notifications
 rgw_enable_usage_log = false
 rgw_enable_ops_log = false

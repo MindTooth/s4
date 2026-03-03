@@ -144,6 +144,56 @@ curl -X POST http://localhost:5000/api/objects/huggingface-import \
   }'
 ```
 
+## Notification Webhook Configuration
+
+```bash
+#!/bin/bash
+TOKEN="your-jwt-token"
+BUCKET="my-bucket"
+
+# 1. Test endpoint reachability
+curl -X POST http://localhost:5000/api/notifications/test-endpoint \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"endpoint": "https://example.com/webhook"}'
+
+# 2. Configure notifications
+curl -X PUT "http://localhost:5000/api/notifications/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "notifications": [
+      {
+        "endpoint": "https://example.com/webhook",
+        "events": ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"],
+        "prefix": "data/",
+        "suffix": ".csv"
+      }
+    ]
+  }'
+
+# 3. View current configuration
+curl "http://localhost:5000/api/notifications/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN"
+
+# 4. Add a second notification without removing existing ones
+CURRENT=$(curl -s "http://localhost:5000/api/notifications/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN")
+echo "$CURRENT" | jq '.notifications += [{
+  "endpoint": "https://example.com/audit",
+  "events": ["s3:ObjectRemoved:*"]
+}]' | curl -X PUT "http://localhost:5000/api/notifications/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @-
+
+# 5. Delete a specific notification by ID
+NOTIF_ID=$(curl -s "http://localhost:5000/api/notifications/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN" | jq -r '.notifications[0].id')
+curl -X DELETE "http://localhost:5000/api/notifications/$BUCKET/$NOTIF_ID" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
 ## Batch Operations
 
 ```bash

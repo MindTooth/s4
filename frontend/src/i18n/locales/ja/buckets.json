@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "無効な bucket 名",
     "invalidNameMessage": "Bucket 名 {{bucketName}} は無効です。規則を確認してもう一度お試しください。"
+  },
+  "notifications": {
+    "title": "Bucket 通知",
+    "description": "この bucket のイベントに対する Webhook 通知を設定します。",
+    "emptyState": {
+      "title": "通知が設定されていません",
+      "description": "この bucket でオブジェクトが作成または削除されたときに Webhook イベントを受信するには、通知を追加してください。"
+    },
+    "table": {
+      "endpoint": "エンドポイント URL",
+      "events": "イベント",
+      "filters": "フィルター",
+      "actions": "アクション"
+    },
+    "form": {
+      "addTitle": "通知を追加",
+      "endpointLabel": "エンドポイント URL",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "イベント通知を受信する HTTP または HTTPS の URL",
+      "eventsLabel": "イベント",
+      "objectCreated": "オブジェクト作成",
+      "objectRemoved": "オブジェクト削除",
+      "prefixLabel": "キープレフィックスフィルター",
+      "prefixPlaceholder": "例: uploads/",
+      "suffixLabel": "キーサフィックスフィルター",
+      "suffixPlaceholder": "例: .jpg",
+      "addButton": "通知を追加",
+      "testButton": "エンドポイントをテスト",
+      "editTitle": "通知を編集",
+      "saveButton": "変更を保存",
+      "cancelButton": "編集をキャンセル"
+    },
+    "deleteConfirm": {
+      "title": "通知を削除しますか？",
+      "message": "このエンドポイントへのイベント送信が停止されます。"
+    },
+    "success": {
+      "created": "通知を追加しました",
+      "createdMessage": "通知設定が正常に更新されました。",
+      "deleted": "通知を削除しました",
+      "deletedMessage": "通知が正常に削除されました。",
+      "updated": "通知が更新されました",
+      "updatedMessage": "通知が正常に更新されました。",
+      "testSuccess": "エンドポイント到達可能",
+      "testSuccessMessage": "エンドポイントがステータス {{statusCode}} で応答しました。"
+    },
+    "error": {
+      "loadFailed": "通知の読み込みに失敗しました",
+      "saveFailed": "通知の保存に失敗しました",
+      "deleteFailed": "通知の削除に失敗しました",
+      "testFailed": "エンドポイント到達不能",
+      "testFailedMessage": "エンドポイントに到達できませんでした: {{message}}",
+      "endpointRequired": "エンドポイント URL は必須です",
+      "endpointInvalid": "エンドポイントは http:// または https:// で始まる必要があります",
+      "eventsRequired": "少なくとも 1 つのイベントタイプを選択してください"
+    },
+    "actions": {
+      "notifications": "通知"
+    }
+  },
+  "tooltips": {
+    "notifications": "バケットの通知を管理します。",
+    "deleteBucket": "このバケットを削除します。",
+    "editNotification": "この通知を編集します。",
+    "deleteNotification": "この通知を削除します。"
   }
 }

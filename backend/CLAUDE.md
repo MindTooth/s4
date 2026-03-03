@@ -111,9 +111,9 @@ fastify.get('/:bucketName/:encodedKey', async (req: TypedRequest<ObjectParams, O
 
 **Available Types**:
 
-- **Params**: `BucketParams`, `ObjectParams`, `TransferJobParams`, `LocationParams`
+- **Params**: `BucketParams`, `ObjectParams`, `TransferJobParams`, `LocationParams`, `NotificationParams`
 - **Query**: `ObjectQueryParams`, `LocalQueryParams`
-- **Body**: `CreateBucketBody`, `S3ConfigBody`, `TransferRequestBody`, etc.
+- **Body**: `CreateBucketBody`, `S3ConfigBody`, `TransferRequestBody`, `NotificationConfigBody`, `TestEndpointBody`, etc.
 
 **Justified `as any` Usage**:
 
@@ -127,7 +127,8 @@ fastify.get('/:bucketName/:encodedKey', async (req: TypedRequest<ObjectParams, O
 
 - **Local filesystem storage** - `/api/local/*` routes provide file operations on configured local paths (`LOCAL_STORAGE_PATHS`)
 - **File type validation** - Configurable allowed/blocked extensions (`utils/fileValidation.ts`)
-- **Audit logging** - Structured audit events for auth, storage, and transfer operations (`utils/auditLog.ts`)
+- **Audit logging** - Structured audit events for auth, storage, transfer, and notification operations (`utils/auditLog.ts`)
+- **Bucket notifications** - Webhook-based event notifications via filesystem watching (`routes/api/notifications/`, `utils/notificationStore.ts`, `utils/bucketWatcher.ts`, `utils/webhookDispatcher.ts`)
 - **Transfer queue** - Managed concurrent cross-storage transfers with progress tracking (`utils/transferQueue.ts`)
 - **Path prefix routing** - `NB_PREFIX` support for gateway/ingress deployments
 
@@ -277,6 +278,8 @@ fastify.post('/', { schema: createBucketSchema }, async (req, reply) => {
 - `updateProxyConfigSchema` - Proxy settings
 - `updateHFConfigSchema` - HuggingFace token
 - `transferRequestSchema` - Transfer job creation
+- `putNotificationsSchema` - Notification configuration
+- `testEndpointSchema` - Notification endpoint testing
 
 **Location**: `backend/src/schemas/index.ts`
 
@@ -370,6 +373,7 @@ API routes are organized under `/api/*` and auto-loaded from `src/routes/api/`:
 - `/api/objects` - S3 object operations (upload, download, list, delete, tags, metadata)
 - `/api/settings` - Configuration management (S3, HuggingFace, proxy, concurrency, pagination)
 - `/api/disclaimer` - Application metadata
+- `/api/notifications` - Bucket notification management (webhooks via filesystem watching)
 - `/api/transfer` - Cross-storage transfer operations and SSE progress
 - `/api/local/*` - Local filesystem storage operations (list, upload, download, mkdir, delete)
 
@@ -447,7 +451,7 @@ backend/
 │   ├── config/           # CORS configuration
 │   ├── schemas/          # Request validation schemas
 │   ├── types.ts          # TypeScript type definitions
-│   ├── utils/            # Config, logging, constants, validation, audit
+│   ├── utils/            # Config, logging, constants, validation, audit, notifications
 │   ├── __tests__/        # Jest tests
 │   ├── app.ts            # Fastify app initialization, global auth hook
 │   └── server.ts         # Server entry point
@@ -497,6 +501,11 @@ Key configuration for backend development (see [Configuration Reference](../docs
 **SSE**:
 
 - `SSE_TICKET_TTL_SECONDS` (default: 60) - One-time SSE ticket lifetime
+
+**Notifications**:
+
+- `NOTIFICATION_STORE_PATH` (default: `/var/lib/ceph/radosgw/db/notifications.json`) - Path to JSON file storing notification configs
+- `BUCKET_DATA_PATH` (default: `/var/lib/ceph/radosgw/buckets`) - Path to Ceph POSIX backend bucket data directory
 
 **Routing**:
 

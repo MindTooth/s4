@@ -28,11 +28,15 @@ import {
   Skeleton,
   TextInput,
   Tooltip,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody, Td, Th, ThProps, Thead, Tr } from '@patternfly/react-table';
 import {
   AngleLeftIcon,
   AngleRightIcon,
+  BellIcon,
   CloudIcon,
   CubesIcon,
   DatabaseIcon,
@@ -47,6 +51,7 @@ import { notifyApiError, notifySuccess, notifyWarning } from '@app/utils/notific
 import { getBucketNameRules, validateS3BucketName } from '@app/utils/validation';
 import { useModal, useStorageLocations } from '@app/hooks';
 import { MobileCardItem, MobileCardView, ResponsiveTableWrapper } from '@app/components/ResponsiveTable';
+import BucketNotificationsModal from './BucketNotificationsModal';
 
 class Bucket {
   Name: string;
@@ -120,6 +125,15 @@ const Buckets: React.FunctionComponent = () => {
   const handleNewBucketCancel = () => {
     setNewBucketName('');
     createBucketModal.close();
+  };
+
+  // Notifications modal handling
+  const notificationsModal = useModal();
+  const [notificationsBucket, setNotificationsBucket] = React.useState('');
+
+  const handleNotificationsClick = (name: string) => (_event: React.MouseEvent<HTMLButtonElement>) => {
+    setNotificationsBucket(name);
+    notificationsModal.open();
   };
 
   // Delete bucket handling
@@ -338,15 +352,30 @@ const Buckets: React.FunctionComponent = () => {
       },
     ],
     actions: row.type === 's3' && (
-      <Button
-        variant="danger"
-        size="sm"
-        onClick={handleDeleteBucketClick(row.name)}
-        isDisabled={!row.available}
-        aria-label={t('deleteModal.confirm') + ': ' + row.name}
-      >
-        <TrashIcon />
-      </Button>
+      <>
+        <Tooltip content={<div>{t('tooltips.notifications')}</div>}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleNotificationsClick(row.name)}
+            isDisabled={!row.available}
+            aria-label={t('notifications.actions.notifications') + ': ' + row.name}
+          >
+            <BellIcon />
+          </Button>
+        </Tooltip>{' '}
+        <Tooltip content={<div>{t('tooltips.deleteBucket')}</div>}>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={handleDeleteBucketClick(row.name)}
+            isDisabled={!row.available}
+            aria-label={t('deleteModal.confirm') + ': ' + row.name}
+          >
+            <TrashIcon />
+          </Button>
+        </Tooltip>
+      </>
     ),
     onClick: row.available ? () => navigate(`/browse/${row.id}`) : undefined,
     isDisabled: !row.available,
@@ -606,14 +635,39 @@ const Buckets: React.FunctionComponent = () => {
                           <Td className="bucket-column s4-hide-below-md">{row.owner || '-'}</Td>
                           <Td className="bucket-column align-right">
                             {row.type === 's3' && (
-                              <Button
-                                variant="danger"
-                                onClick={handleDeleteBucketClick(row.name)}
-                                isDisabled={!row.available}
-                                aria-label={t('deleteModal.confirm') + ': ' + row.name}
-                              >
-                                <TrashIcon />
-                              </Button>
+                              <ToolbarContent>
+                                <ToolbarGroup
+                                  variant="action-group-plain"
+                                  align={{ default: 'alignEnd' }}
+                                  gap={{ default: 'gapMd', md: 'gapMd' }}
+                                >
+                                  <ToolbarItem>
+                                    <Tooltip content={<div>{t('tooltips.notifications')}</div>}>
+                                      <Button
+                                        variant="secondary"
+                                        onClick={handleNotificationsClick(row.name)}
+                                        isDisabled={!row.available}
+                                        aria-label={t('notifications.actions.notifications') + ': ' + row.name}
+                                      >
+                                        <BellIcon />
+                                      </Button>
+                                    </Tooltip>
+                                  </ToolbarItem>
+                                  <ToolbarItem variant="separator" />
+                                  <ToolbarItem>
+                                    <Tooltip content={<div>{t('tooltips.deleteBucket')}</div>}>
+                                      <Button
+                                        variant="danger"
+                                        onClick={handleDeleteBucketClick(row.name)}
+                                        isDisabled={!row.available}
+                                        aria-label={t('deleteModal.confirm') + ': ' + row.name}
+                                      >
+                                        <TrashIcon />
+                                      </Button>
+                                    </Tooltip>
+                                  </ToolbarItem>
+                                </ToolbarGroup>
+                              </ToolbarContent>
                             )}
                           </Td>
                         </Tr>
@@ -752,6 +806,11 @@ const Buckets: React.FunctionComponent = () => {
           </Button>
         </ModalFooter>
       </Modal>
+      <BucketNotificationsModal
+        bucketName={notificationsBucket}
+        isOpen={notificationsModal.isOpen}
+        onClose={notificationsModal.close}
+      />
     </div>
   );
 };

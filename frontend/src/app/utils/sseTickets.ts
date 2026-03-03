@@ -48,7 +48,7 @@ export async function requestSseTicket(
     });
 
     return response.data;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('[SSE Tickets] Failed to request ticket:', error);
 

@@ -59,12 +59,12 @@ S4 runs as a single container with two processes managed by supervisord:
 s4/
 ├── backend/               # Fastify API server (TypeScript)
 │   └── src/
-│       ├── routes/api/    # API endpoints (buckets, objects, settings, etc.)
+│       ├── routes/api/    # API endpoints (buckets, objects, notifications, settings, etc.)
 │       ├── plugins/       # Auto-loaded Fastify plugins (auth)
 │       ├── config/        # CORS configuration
 │       ├── schemas/       # Request validation schemas
 │       ├── types.ts       # TypeScript type definitions
-│       ├── utils/         # Configuration, helpers
+│       ├── utils/         # Configuration, helpers, notifications
 │       ├── __tests__/     # Jest tests
 │       ├── app.ts         # Fastify app initialization
 │       └── server.ts      # Entry point

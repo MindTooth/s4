@@ -224,7 +224,8 @@
     "viewFile": "View this file.",
     "downloadFile": "Download this file.",
     "viewDetails": "View file details and tags.",
-    "deleteFile": "Delete this file."
+    "deleteFile": "Delete this file.",
+    "deleteFolder": "Delete this folder."
   },
   "pagination": {
     "loadMore": "Load more",

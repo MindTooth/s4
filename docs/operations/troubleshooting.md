@@ -405,6 +405,104 @@ kubectl edit pvc s4-data
 # Increase: spec.resources.requests.storage
 ```
 
+## Notification / Webhook Issues
+
+### Webhooks Not Firing
+
+**Symptoms**:
+
+- Webhook endpoint not receiving any requests
+- No notification-related entries in logs
+
+**Diagnosis**:
+
+```bash
+# Check notification configuration exists
+curl http://localhost:5000/api/notifications/my-bucket \
+  -H "Authorization: Bearer $TOKEN"
+
+# Test endpoint reachability from S4
+curl -X POST http://localhost:5000/api/notifications/test-endpoint \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"endpoint": "https://example.com/webhook"}'
+
+# Check S4 logs for webhook dispatch errors
+kubectl logs <s4-pod> | grep -i webhook
+kubectl logs <s4-pod> | grep -i notification
+
+# Verify bucket directory exists on disk
+kubectl exec <s4-pod> -- ls -la /var/lib/ceph/radosgw/buckets/my-bucket
+```
+
+**Common Causes**:
+
+1. **Bucket directory does not exist** - The filesystem watcher requires the bucket data directory to exist at `BUCKET_DATA_PATH/<bucketName>`. If the bucket was created on an external S3 or the path is misconfigured, the watcher cannot start.
+
+2. **Endpoint unreachable from S4** - The webhook URL must be reachable from the S4 container. Use the test endpoint feature to verify.
+
+3. **Restrictive filters** - Prefix and suffix filters may be too narrow. Check that your object keys match the configured filters.
+
+4. **Debounce delay** - Events are debounced with a 200ms delay. Very rapid changes may be collapsed into a single event.
+
+5. **Dotfiles ignored** - Files starting with `.` (hidden files, editor temp files) are intentionally filtered out and do not trigger notifications.
+
+### Webhook Receiving Unexpected Events
+
+**Symptoms**:
+
+- Receiving more events than expected
+- Duplicate or unexpected event types
+
+**Solutions**:
+
+1. **Add filters** - Use prefix and suffix filters to narrow which objects trigger notifications
+
+2. **Editor temp files** - Some editors create temporary files during save operations (e.g., `file.txt~`, `file.txt.swp`). While dotfiles are filtered, non-dot temp files may trigger events. Use suffix filters to target specific file types.
+
+3. **Debounce** - A single save operation may generate multiple filesystem events (create + modify). The 200ms debounce handles most cases, but some edge cases may slip through.
+
+### Notifications Lost After Restart
+
+**Symptoms**:
+
+- Notification configurations disappear after S4 restarts
+- Webhooks stop firing after restart
+
+**Diagnosis**:
+
+```bash
+# Check if notification store file exists and has content
+kubectl exec <s4-pod> -- cat /var/lib/ceph/radosgw/db/notifications.json
+
+# Check file permissions
+kubectl exec <s4-pod> -- ls -la /var/lib/ceph/radosgw/db/notifications.json
+
+# Check if the storage path is on a persistent volume
+kubectl describe pod <s4-pod> | grep -A 5 "Mounts"
+```
+
+**Solutions**:
+
+1. **Mount persistent storage** - Ensure `/var/lib/ceph/radosgw/db/` is backed by a PersistentVolumeClaim. Without persistent storage, the notification configuration file is lost on restart.
+
+2. **Check file permissions** - The S4 process must have read/write access to the `NOTIFICATION_STORE_PATH` directory.
+
+### Test Endpoint Fails but Webhook Works (or Vice Versa)
+
+**Symptoms**:
+
+- Test endpoint returns failure but actual webhooks are delivered successfully
+- Test endpoint succeeds but real events are not received
+
+**Solutions**:
+
+1. **Event type filtering** - The test endpoint sends `s3:TestEvent`, which is a special event type. Your webhook receiver may filter or handle it differently than production events like `s3:ObjectCreated:Put`.
+
+2. **Network intermittency** - The test and production webhooks use the same 5-second timeout. Network conditions may vary between test time and event time.
+
+3. **Endpoint routing** - Some webhook receivers route based on the `eventName` field. Ensure your receiver accepts both `s3:TestEvent` and the production event types you configured.
+
 ## Performance Issues
 
 ### High Memory Usage

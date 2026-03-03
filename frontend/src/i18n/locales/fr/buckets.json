@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "Nom de bucket invalide",
     "invalidNameMessage": "Le nom de bucket {{bucketName}} est invalide. Veuillez vérifier les règles et réessayer."
+  },
+  "notifications": {
+    "title": "Notifications du bucket",
+    "description": "Configurez des notifications webhook pour les événements de ce bucket.",
+    "emptyState": {
+      "title": "Aucune notification configurée",
+      "description": "Ajoutez une notification pour recevoir des événements webhook lorsque des objets sont créés ou supprimés dans ce bucket."
+    },
+    "table": {
+      "endpoint": "URL du point de terminaison",
+      "events": "Événements",
+      "filters": "Filtres",
+      "actions": "Actions"
+    },
+    "form": {
+      "addTitle": "Ajouter une notification",
+      "endpointLabel": "URL du point de terminaison",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "URL HTTP ou HTTPS qui recevra les notifications d'événements",
+      "eventsLabel": "Événements",
+      "objectCreated": "Objet créé",
+      "objectRemoved": "Objet supprimé",
+      "prefixLabel": "Filtre de préfixe de clé",
+      "prefixPlaceholder": "ex. uploads/",
+      "suffixLabel": "Filtre de suffixe de clé",
+      "suffixPlaceholder": "ex. .jpg",
+      "addButton": "Ajouter une notification",
+      "testButton": "Tester le point de terminaison",
+      "editTitle": "Modifier la notification",
+      "saveButton": "Enregistrer les modifications",
+      "cancelButton": "Annuler la modification"
+    },
+    "deleteConfirm": {
+      "title": "Supprimer la notification ?",
+      "message": "Cela arrêtera l'envoi d'événements à ce point de terminaison."
+    },
+    "success": {
+      "created": "Notification ajoutée",
+      "createdMessage": "La configuration des notifications a été mise à jour avec succès.",
+      "deleted": "Notification supprimée",
+      "deletedMessage": "La notification a été supprimée avec succès.",
+      "updated": "Notification mise à jour",
+      "updatedMessage": "La notification a été mise à jour avec succès.",
+      "testSuccess": "Point de terminaison accessible",
+      "testSuccessMessage": "Le point de terminaison a répondu avec le statut {{statusCode}}."
+    },
+    "error": {
+      "loadFailed": "Échec du chargement des notifications",
+      "saveFailed": "Échec de l'enregistrement de la notification",
+      "deleteFailed": "Échec de la suppression de la notification",
+      "testFailed": "Point de terminaison inaccessible",
+      "testFailedMessage": "Impossible d'atteindre le point de terminaison : {{message}}",
+      "endpointRequired": "L'URL du point de terminaison est requise",
+      "endpointInvalid": "Le point de terminaison doit commencer par http:// ou https://",
+      "eventsRequired": "Au moins un type d'événement doit être sélectionné"
+    },
+    "actions": {
+      "notifications": "Notifications"
+    }
+  },
+  "tooltips": {
+    "notifications": "Gérer les notifications du bucket.",
+    "deleteBucket": "Supprimer ce bucket.",
+    "editNotification": "Modifier cette notification.",
+    "deleteNotification": "Supprimer cette notification."
   }
 }

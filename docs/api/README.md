@@ -313,6 +313,14 @@ Rate limits are hardcoded and stored in-memory. Exceeded limits return HTTP 429 
   - `POST /objects/huggingface-import` - Import HuggingFace model
   - `GET /objects/upload-progress/:encodedKey` - Upload progress (SSE)
 
+### Notifications
+
+- [Notifications API](notifications.md)
+  - `GET /notifications/:bucketName` - Get bucket notification configurations
+  - `PUT /notifications/:bucketName` - Set bucket notification configurations
+  - `DELETE /notifications/:bucketName/:notificationId` - Remove a notification
+  - `POST /notifications/test-endpoint` - Test a webhook endpoint
+
 ### Transfers
 
 - [Transfer API](transfer.md)

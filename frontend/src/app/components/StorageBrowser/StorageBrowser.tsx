@@ -2242,14 +2242,16 @@ const StorageBrowser: React.FC = () => {
         },
       ],
       actions: (
-        <Button
-          variant="danger"
-          size="sm"
-          onClick={handleDeleteFolderClick(dir.path)}
-          aria-label={`Delete folder ${dir.name}`}
-        >
-          <TrashIcon />
-        </Button>
+        <Tooltip content={<div>{t('tooltips.deleteFolder')}</div>}>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={handleDeleteFolderClick(dir.path)}
+            aria-label={`Delete folder ${dir.name}`}
+          >
+            <TrashIcon />
+          </Button>
+        </Tooltip>
       ),
       selectable: true,
       isSelected: selectedItems.has(dir.path),
@@ -2746,14 +2748,16 @@ const StorageBrowser: React.FC = () => {
                             </Td>
                             <Td className="bucket-column s4-hide-below-sm">-</Td>
                             <Td className="bucket-column align-right">
-                              <Button
-                                variant="danger"
-                                className="button-file-control"
-                                onClick={handleDeleteFolderClick(dir.path)}
-                                aria-label={`Delete folder ${dir.name}`}
-                              >
-                                <TrashIcon />
-                              </Button>
+                              <Tooltip content={<div>{t('tooltips.deleteFolder')}</div>}>
+                                <Button
+                                  variant="danger"
+                                  className="button-file-control"
+                                  onClick={handleDeleteFolderClick(dir.path)}
+                                  aria-label={`Delete folder ${dir.name}`}
+                                >
+                                  <TrashIcon />
+                                </Button>
+                              </Tooltip>
                             </Td>
                           </Tr>
                         ))}
