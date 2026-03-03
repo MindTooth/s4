@@ -224,7 +224,8 @@
     "viewFile": "이 파일을 봅니다.",
     "downloadFile": "이 파일을 다운로드합니다.",
     "viewDetails": "파일 상세 정보 및 태그를 봅니다.",
-    "deleteFile": "이 파일을 삭제합니다."
+    "deleteFile": "이 파일을 삭제합니다.",
+    "deleteFolder": "이 폴더를 삭제합니다."
   },
   "pagination": {
     "loadMore": "더 불러오기",

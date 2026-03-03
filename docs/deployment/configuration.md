@@ -48,6 +48,8 @@ AWS_S3_ENDPOINT=https://rgw.example.com
 | `JWT_SECRET`             | (auto-generated) | No       | JWT signing secret (auto-generated if not provided)                    |
 | `JWT_EXPIRATION_HOURS`   | `8`              | No       | JWT token expiration time in hours                                     |
 | `SSE_TICKET_TTL_SECONDS` | `60`             | No       | Server-Sent Events one-time ticket TTL in seconds                      |
+| `NOTIFICATION_STORE_PATH`| `/var/lib/ceph/radosgw/db/notifications.json` | No | Path to JSON file storing notification configs |
+| `BUCKET_DATA_PATH`       | `/var/lib/ceph/radosgw/buckets` | No | Path to Ceph POSIX backend bucket data directory |
 
 #### Authentication Modes
 
@@ -430,11 +432,11 @@ storage:
   maxFileSizeGB: 20
   maxConcurrentTransfers: 2
   data:
-    size: 10Gi          # S3 data PVC (required)
+    size: 10Gi # S3 data PVC (required)
     storageClass: ''
     existingClaim: ''
   localStorage:
-    size: 50Gi          # Local storage PVC (only created when localPaths is set)
+    size: 50Gi # Local storage PVC (only created when localPaths is set)
     storageClass: ''
     existingClaim: ''
 ```

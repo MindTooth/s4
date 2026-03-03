@@ -222,18 +222,18 @@ See the [Helm chart README](../../charts/s4/README.md) for complete values docum
 
 Key configuration groups:
 
-| Group         | Description                   |
-| ------------- | ----------------------------- |
-| `image.*`     | Container image settings      |
-| `s3.*`        | S3 backend configuration      |
-| `auth.*`      | Authentication settings       |
-| `storage.*`   | PVC sizes and storage classes |
-| `resources.*` | CPU and memory limits         |
-| `service.*`   | Service type and ports        |
-| `ingress.*`   | Web UI Ingress configuration         |
-| `ingress.s3Api.*` | S3 API Ingress configuration (optional) |
-| `route.*`     | Web UI OpenShift Route configuration |
-| `route.s3Api.*` | S3 API OpenShift Route configuration (optional) |
+| Group             | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `image.*`         | Container image settings                        |
+| `s3.*`            | S3 backend configuration                        |
+| `auth.*`          | Authentication settings                         |
+| `storage.*`       | PVC sizes and storage classes                   |
+| `resources.*`     | CPU and memory limits                           |
+| `service.*`       | Service type and ports                          |
+| `ingress.*`       | Web UI Ingress configuration                    |
+| `ingress.s3Api.*` | S3 API Ingress configuration (optional)         |
+| `route.*`         | Web UI OpenShift Route configuration            |
+| `route.s3Api.*`   | S3 API OpenShift Route configuration (optional) |
 
 ### Upgrading with Helm
 

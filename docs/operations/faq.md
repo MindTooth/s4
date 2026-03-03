@@ -275,6 +275,47 @@ Then use the HuggingFace import feature in the UI.
 - **In transit**: Deploy behind HTTPS reverse proxy/ingress
 - **S3 SSE**: Not currently supported
 
+### Does S4 support bucket notifications?
+
+Yes. S4 supports webhook-based bucket notifications. You can configure one or more HTTP/HTTPS webhook endpoints per bucket, and S4 will send POST requests with S3-compatible event payloads when objects are created, modified, or deleted. Notifications can be configured via the web UI (notification bell icon on each bucket) or via the [Notifications API](../api/notifications.md).
+
+### What webhook payload format does S4 use?
+
+S4 sends a simplified AWS S3 notification format:
+
+```json
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "eventName": "s3:ObjectCreated:Put",
+      "eventTime": "2024-02-19T10:30:45.123Z",
+      "s3": {
+        "bucket": { "name": "my-bucket" },
+        "object": { "key": "path/to/file.txt", "size": 1024 }
+      }
+    }
+  ]
+}
+```
+
+This is a subset of the full AWS S3 notification format, containing the most commonly used fields.
+
+### Are notification webhooks retried if they fail?
+
+No. S4 uses fire-and-forget delivery with a 5-second timeout. If a webhook endpoint is unreachable or returns an error, the notification is not retried. Failed deliveries are logged as warnings in S4's server logs.
+
+### Can I filter which events trigger notifications?
+
+Yes. Each notification configuration supports two types of filters:
+
+- **Event type selection** - Choose `s3:ObjectCreated:*` (object created/modified), `s3:ObjectRemoved:*` (object deleted), or both
+- **Prefix filter** - Only trigger for object keys starting with a specified string (e.g., `uploads/`)
+- **Suffix filter** - Only trigger for object keys ending with a specified string (e.g., `.json`)
+
+When both prefix and suffix filters are set, an object must match both to trigger the notification.
+
 ## Troubleshooting Questions
 
 ### S4 container won't start

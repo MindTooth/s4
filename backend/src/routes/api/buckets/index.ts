@@ -7,6 +7,8 @@ import { createBucketSchema } from '../../../schemas';
 import { BucketParams, CreateBucketBody } from '../../../types';
 import { handleS3Error } from '../../../utils/errorHandler';
 import { auditLogExtended, AuditEventType } from '../../../utils/auditLog';
+import { setNotifications } from '../../../utils/notificationStore';
+import { stopWatching } from '../../../utils/bucketWatcher';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   // Note: Authentication is handled by the global auth hook in app.ts
@@ -93,6 +95,10 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     logAccess(req);
     const { s3Client } = getS3Config();
     const { bucketName } = req.params;
+
+    // Clean up notification configs and watcher before deleting the bucket
+    stopWatching(bucketName);
+    await setNotifications(bucketName, []);
 
     const deleteBucketCommand = new DeleteBucketCommand({
       Bucket: bucketName,

@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "Invalid bucket name",
     "invalidNameMessage": "Bucket name {{bucketName}} is invalid. Please check the rules and try again."
+  },
+  "notifications": {
+    "title": "Bucket Notifications",
+    "description": "Configure webhook notifications for events in this bucket.",
+    "emptyState": {
+      "title": "No notifications configured",
+      "description": "Add a notification to receive webhook events when objects are created or deleted in this bucket."
+    },
+    "table": {
+      "endpoint": "Endpoint URL",
+      "events": "Events",
+      "filters": "Filters",
+      "actions": "Actions"
+    },
+    "form": {
+      "addTitle": "Add Notification",
+      "endpointLabel": "Endpoint URL",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "HTTP or HTTPS URL that will receive event notifications",
+      "eventsLabel": "Events",
+      "objectCreated": "Object Created",
+      "objectRemoved": "Object Removed",
+      "prefixLabel": "Key prefix filter",
+      "prefixPlaceholder": "e.g. uploads/",
+      "suffixLabel": "Key suffix filter",
+      "suffixPlaceholder": "e.g. .jpg",
+      "addButton": "Add Notification",
+      "testButton": "Test Endpoint",
+      "editTitle": "Edit Notification",
+      "saveButton": "Save Changes",
+      "cancelButton": "Cancel Editing"
+    },
+    "deleteConfirm": {
+      "title": "Remove notification?",
+      "message": "This will stop sending events to this endpoint."
+    },
+    "success": {
+      "created": "Notification added",
+      "createdMessage": "Notification configuration has been updated successfully.",
+      "deleted": "Notification removed",
+      "deletedMessage": "Notification has been removed successfully.",
+      "updated": "Notification updated",
+      "updatedMessage": "Notification has been updated successfully.",
+      "testSuccess": "Endpoint reachable",
+      "testSuccessMessage": "Endpoint responded with status {{statusCode}}."
+    },
+    "error": {
+      "loadFailed": "Failed to load notifications",
+      "saveFailed": "Failed to save notification",
+      "deleteFailed": "Failed to remove notification",
+      "testFailed": "Endpoint unreachable",
+      "testFailedMessage": "Could not reach the endpoint: {{message}}",
+      "endpointRequired": "Endpoint URL is required",
+      "endpointInvalid": "Endpoint must start with http:// or https://",
+      "eventsRequired": "At least one event type must be selected"
+    },
+    "actions": {
+      "notifications": "Notifications"
+    }
+  },
+  "tooltips": {
+    "notifications": "Manage bucket notifications.",
+    "deleteBucket": "Delete this bucket.",
+    "editNotification": "Edit this notification.",
+    "deleteNotification": "Remove this notification."
   }
 }

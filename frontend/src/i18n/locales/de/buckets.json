@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "Ungültiger Bucket-Name",
     "invalidNameMessage": "Bucket-Name {{bucketName}} ist ungültig. Bitte überprüfen Sie die Regeln und versuchen Sie es erneut."
+  },
+  "notifications": {
+    "title": "Bucket-Benachrichtigungen",
+    "description": "Konfigurieren Sie Webhook-Benachrichtigungen für Ereignisse in diesem Bucket.",
+    "emptyState": {
+      "title": "Keine Benachrichtigungen konfiguriert",
+      "description": "Fügen Sie eine Benachrichtigung hinzu, um Webhook-Ereignisse zu erhalten, wenn Objekte in diesem Bucket erstellt oder gelöscht werden."
+    },
+    "table": {
+      "endpoint": "Endpunkt-URL",
+      "events": "Ereignisse",
+      "filters": "Filter",
+      "actions": "Aktionen"
+    },
+    "form": {
+      "addTitle": "Benachrichtigung hinzufügen",
+      "endpointLabel": "Endpunkt-URL",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "HTTP- oder HTTPS-URL, die Ereignisbenachrichtigungen empfängt",
+      "eventsLabel": "Ereignisse",
+      "objectCreated": "Objekt erstellt",
+      "objectRemoved": "Objekt gelöscht",
+      "prefixLabel": "Schlüsselpräfix-Filter",
+      "prefixPlaceholder": "z.B. uploads/",
+      "suffixLabel": "Schlüsselsuffix-Filter",
+      "suffixPlaceholder": "z.B. .jpg",
+      "addButton": "Benachrichtigung hinzufügen",
+      "testButton": "Endpunkt testen",
+      "editTitle": "Benachrichtigung bearbeiten",
+      "saveButton": "Änderungen speichern",
+      "cancelButton": "Bearbeitung abbrechen"
+    },
+    "deleteConfirm": {
+      "title": "Benachrichtigung entfernen?",
+      "message": "Dadurch werden keine Ereignisse mehr an diesen Endpunkt gesendet."
+    },
+    "success": {
+      "created": "Benachrichtigung hinzugefügt",
+      "createdMessage": "Benachrichtigungskonfiguration wurde erfolgreich aktualisiert.",
+      "deleted": "Benachrichtigung entfernt",
+      "deletedMessage": "Benachrichtigung wurde erfolgreich entfernt.",
+      "updated": "Benachrichtigung aktualisiert",
+      "updatedMessage": "Die Benachrichtigung wurde erfolgreich aktualisiert.",
+      "testSuccess": "Endpunkt erreichbar",
+      "testSuccessMessage": "Endpunkt hat mit Status {{statusCode}} geantwortet."
+    },
+    "error": {
+      "loadFailed": "Benachrichtigungen konnten nicht geladen werden",
+      "saveFailed": "Benachrichtigung konnte nicht gespeichert werden",
+      "deleteFailed": "Benachrichtigung konnte nicht entfernt werden",
+      "testFailed": "Endpunkt nicht erreichbar",
+      "testFailedMessage": "Der Endpunkt konnte nicht erreicht werden: {{message}}",
+      "endpointRequired": "Endpunkt-URL ist erforderlich",
+      "endpointInvalid": "Endpunkt muss mit http:// oder https:// beginnen",
+      "eventsRequired": "Mindestens ein Ereignistyp muss ausgewählt werden"
+    },
+    "actions": {
+      "notifications": "Benachrichtigungen"
+    }
+  },
+  "tooltips": {
+    "notifications": "Bucket-Benachrichtigungen verwalten.",
+    "deleteBucket": "Diesen Bucket löschen.",
+    "editNotification": "Diese Benachrichtigung bearbeiten.",
+    "deleteNotification": "Diese Benachrichtigung entfernen."
   }
 }

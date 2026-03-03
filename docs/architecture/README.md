@@ -34,6 +34,7 @@ S4 is a lightweight, self-contained S3-compatible storage solution with a web-ba
 
 - Web-based file browser for S3 buckets and local storage
 - Bucket management (create, delete, browse)
+- Bucket notification management (webhook configuration)
 - Object operations (upload, download, delete)
 - Cross-storage file transfers
 - HuggingFace model import
@@ -58,6 +59,7 @@ See [Frontend Architecture](frontend.md) for details.
 - RESTful API for storage operations
 - Serves static frontend files in production
 - S3 SDK integration (AWS SDK v3)
+- Filesystem-based bucket notification watching with webhook dispatch
 - JWT-based authentication (optional)
 - SSE endpoints for real-time progress
 - Request validation and error handling
@@ -162,6 +164,7 @@ s4/
 │       │   ├── auth/      # Authentication endpoints
 │       │   ├── buckets/   # Bucket operations
 │       │   ├── objects/   # Object operations
+│       │   ├── notifications/ # Bucket notification management
 │       │   ├── transfer/  # Transfer operations
 │       │   ├── settings/  # Configuration management
 │       │   └── local/     # Local filesystem operations
@@ -176,6 +179,7 @@ s4/
 │       │   ├── AppLayout.tsx          # Main layout
 │       │   ├── StorageBrowser.tsx     # File browser
 │       │   ├── Buckets.tsx            # Bucket management
+│       │   ├── BucketNotificationsModal.tsx # Notification config
 │       │   ├── Settings.tsx           # Configuration UI
 │       │   └── AuthContext.tsx        # Auth state management
 │       ├── hooks/         # Custom React hooks
@@ -207,6 +211,7 @@ s4/
 - **Framework**: Fastify 4
 - **Language**: TypeScript
 - **S3 Client**: AWS SDK v3
+- **Notifications**: Filesystem watching with webhook dispatch
 - **Authentication**: JWT (jsonwebtoken)
 - **Validation**: Fastify JSON Schema
 - **Logging**: Pino (Fastify's logger)

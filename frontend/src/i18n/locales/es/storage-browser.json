@@ -224,7 +224,8 @@
     "viewFile": "Ver este archivo.",
     "downloadFile": "Descargar este archivo.",
     "viewDetails": "Ver detalles y etiquetas del archivo.",
-    "deleteFile": "Eliminar este archivo."
+    "deleteFile": "Eliminar este archivo.",
+    "deleteFolder": "Eliminar esta carpeta."
   },
   "pagination": {
     "loadMore": "Cargar más",

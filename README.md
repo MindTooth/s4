@@ -64,6 +64,7 @@ For detailed instructions on using S4 — browsing storage, managing buckets, tr
 - **Object Operations** - Upload, download, browse, and delete objects
 - **Standard Filesystem Operations** - Browse and manage mounted filesystem/PVC storage
 - **Cross-Storage Transfers** - Transfer files between storage locations in any combination (S3 ↔ PVC, S3 ↔ S3, PVC ↔ PVC)
+- **Bucket Notifications** - Webhook-based notifications for object changes (create, modify, delete)
 - **HuggingFace Integration** - Direct model import from HuggingFace Hub
 
 ## Documentation

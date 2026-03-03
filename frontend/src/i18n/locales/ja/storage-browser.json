@@ -224,7 +224,8 @@
     "viewFile": "このファイルを表示します。",
     "downloadFile": "このファイルをダウンロードします。",
     "viewDetails": "ファイルの詳細とタグを表示します。",
-    "deleteFile": "このファイルを削除します。"
+    "deleteFile": "このファイルを削除します。",
+    "deleteFolder": "このフォルダーを削除します。"
   },
   "pagination": {
     "loadMore": "さらに読み込む",

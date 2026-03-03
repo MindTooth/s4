@@ -34,6 +34,7 @@ Complete REST API documentation with examples.
 - **[API Overview](api/README.md)** - Authentication and common patterns
 - **[Buckets API](api/buckets.md)** - S3 bucket operations
 - **[Objects API](api/objects.md)** - S3 object operations
+- **[Notifications API](api/notifications.md)** - Bucket notification webhooks
 - **[Transfer API](api/transfer.md)** - Cross-storage file transfers
 - **[Settings API](api/settings.md)** - Configuration management
 - **[Local Storage API](api/local.md)** - Local filesystem operations

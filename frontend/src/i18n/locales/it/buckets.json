@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "Nome del bucket non valido",
     "invalidNameMessage": "Il nome del bucket {{bucketName}} non è valido. Controlla le regole e riprova."
+  },
+  "notifications": {
+    "title": "Notifiche del bucket",
+    "description": "Configura le notifiche webhook per gli eventi in questo bucket.",
+    "emptyState": {
+      "title": "Nessuna notifica configurata",
+      "description": "Aggiungi una notifica per ricevere eventi webhook quando gli oggetti vengono creati o eliminati in questo bucket."
+    },
+    "table": {
+      "endpoint": "URL dell'endpoint",
+      "events": "Eventi",
+      "filters": "Filtri",
+      "actions": "Azioni"
+    },
+    "form": {
+      "addTitle": "Aggiungi notifica",
+      "endpointLabel": "URL dell'endpoint",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "URL HTTP o HTTPS che riceverà le notifiche degli eventi",
+      "eventsLabel": "Eventi",
+      "objectCreated": "Oggetto creato",
+      "objectRemoved": "Oggetto eliminato",
+      "prefixLabel": "Filtro prefisso chiave",
+      "prefixPlaceholder": "es. uploads/",
+      "suffixLabel": "Filtro suffisso chiave",
+      "suffixPlaceholder": "es. .jpg",
+      "addButton": "Aggiungi notifica",
+      "testButton": "Testa endpoint",
+      "editTitle": "Modifica notifica",
+      "saveButton": "Salva modifiche",
+      "cancelButton": "Annulla modifica"
+    },
+    "deleteConfirm": {
+      "title": "Rimuovere la notifica?",
+      "message": "Questo interromperà l'invio di eventi a questo endpoint."
+    },
+    "success": {
+      "created": "Notifica aggiunta",
+      "createdMessage": "La configurazione delle notifiche è stata aggiornata con successo.",
+      "deleted": "Notifica rimossa",
+      "deletedMessage": "La notifica è stata rimossa con successo.",
+      "updated": "Notifica aggiornata",
+      "updatedMessage": "La notifica è stata aggiornata con successo.",
+      "testSuccess": "Endpoint raggiungibile",
+      "testSuccessMessage": "L'endpoint ha risposto con stato {{statusCode}}."
+    },
+    "error": {
+      "loadFailed": "Impossibile caricare le notifiche",
+      "saveFailed": "Impossibile salvare la notifica",
+      "deleteFailed": "Impossibile rimuovere la notifica",
+      "testFailed": "Endpoint non raggiungibile",
+      "testFailedMessage": "Impossibile raggiungere l'endpoint: {{message}}",
+      "endpointRequired": "L'URL dell'endpoint è obbligatorio",
+      "endpointInvalid": "L'endpoint deve iniziare con http:// o https://",
+      "eventsRequired": "È necessario selezionare almeno un tipo di evento"
+    },
+    "actions": {
+      "notifications": "Notifiche"
+    }
+  },
+  "tooltips": {
+    "notifications": "Gestisci le notifiche del bucket.",
+    "deleteBucket": "Elimina questo bucket.",
+    "editNotification": "Modifica questa notifica.",
+    "deleteNotification": "Rimuovi questa notifica."
   }
 }

@@ -61,5 +61,70 @@
   "validation": {
     "invalidName": "잘못된 bucket 이름",
     "invalidNameMessage": "Bucket 이름 {{bucketName}}이(가) 유효하지 않습니다. 규칙을 확인하고 다시 시도하세요."
+  },
+  "notifications": {
+    "title": "Bucket 알림",
+    "description": "이 bucket의 이벤트에 대한 웹훅 알림을 구성합니다.",
+    "emptyState": {
+      "title": "구성된 알림이 없습니다",
+      "description": "이 bucket에서 객체가 생성되거나 삭제될 때 웹훅 이벤트를 수신하려면 알림을 추가하세요."
+    },
+    "table": {
+      "endpoint": "엔드포인트 URL",
+      "events": "이벤트",
+      "filters": "필터",
+      "actions": "작업"
+    },
+    "form": {
+      "addTitle": "알림 추가",
+      "endpointLabel": "엔드포인트 URL",
+      "endpointPlaceholder": "https://example.com/webhook",
+      "endpointHelperText": "이벤트 알림을 수신할 HTTP 또는 HTTPS URL",
+      "eventsLabel": "이벤트",
+      "objectCreated": "객체 생성",
+      "objectRemoved": "객체 삭제",
+      "prefixLabel": "키 접두사 필터",
+      "prefixPlaceholder": "예: uploads/",
+      "suffixLabel": "키 접미사 필터",
+      "suffixPlaceholder": "예: .jpg",
+      "addButton": "알림 추가",
+      "testButton": "엔드포인트 테스트",
+      "editTitle": "알림 편집",
+      "saveButton": "변경 사항 저장",
+      "cancelButton": "편집 취소"
+    },
+    "deleteConfirm": {
+      "title": "알림을 제거하시겠습니까?",
+      "message": "이 엔드포인트로의 이벤트 전송이 중지됩니다."
+    },
+    "success": {
+      "created": "알림 추가됨",
+      "createdMessage": "알림 구성이 성공적으로 업데이트되었습니다.",
+      "deleted": "알림 제거됨",
+      "deletedMessage": "알림이 성공적으로 제거되었습니다.",
+      "updated": "알림 업데이트됨",
+      "updatedMessage": "알림이 성공적으로 업데이트되었습니다.",
+      "testSuccess": "엔드포인트 도달 가능",
+      "testSuccessMessage": "엔드포인트가 상태 {{statusCode}}으로 응답했습니다."
+    },
+    "error": {
+      "loadFailed": "알림을 불러오지 못했습니다",
+      "saveFailed": "알림을 저장하지 못했습니다",
+      "deleteFailed": "알림을 제거하지 못했습니다",
+      "testFailed": "엔드포인트 도달 불가",
+      "testFailedMessage": "엔드포인트에 도달할 수 없습니다: {{message}}",
+      "endpointRequired": "엔드포인트 URL은 필수입니다",
+      "endpointInvalid": "엔드포인트는 http:// 또는 https://로 시작해야 합니다",
+      "eventsRequired": "최소 하나의 이벤트 유형을 선택해야 합니다"
+    },
+    "actions": {
+      "notifications": "알림"
+    }
+  },
+  "tooltips": {
+    "notifications": "버킷 알림을 관리합니다.",
+    "deleteBucket": "이 버킷을 삭제합니다.",
+    "editNotification": "이 알림을 편집합니다.",
+    "deleteNotification": "이 알림을 삭제합니다."
   }
 }

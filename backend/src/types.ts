@@ -135,3 +135,25 @@ export interface ObjectTag {
 export interface ObjectTagsBody {
   tags: ObjectTag[];
 }
+
+// ========== Notification Types ==========
+
+export interface NotificationParams extends BucketParams {
+  notificationId: string;
+}
+
+export interface NotificationEntry {
+  id?: string;
+  endpoint: string;
+  events: string[];
+  prefix?: string;
+  suffix?: string;
+}
+
+export interface NotificationConfigBody {
+  notifications: NotificationEntry[];
+}
+
+export interface TestEndpointBody {
+  endpoint: string;
+}

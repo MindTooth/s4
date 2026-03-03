@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/component: storage
 spec:
   rules:
-    - host: s3.s4.example.com  # Change to your actual hostname
+    - host: s3.s4.example.com # Change to your actual hostname
       http:
         paths:
           - path: /

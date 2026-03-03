@@ -57,6 +57,11 @@ export enum AuditEventType {
   LOCAL_LIST = 'local.list',
   LOCAL_MKDIR = 'local.mkdir',
 
+  // Notification operations
+  NOTIFICATION_CREATE = 'notification.create',
+  NOTIFICATION_DELETE = 'notification.delete',
+  NOTIFICATION_TEST = 'notification.test',
+
   // Generic operations (backward compatibility)
   GENERIC = 'generic',
 }
