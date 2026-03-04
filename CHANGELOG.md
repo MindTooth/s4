@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-03-04
+
+### Fixed
+
+- Content Security Policy blocking resources by adding `useDefaults: false` to Helmet CSP configuration (#15)
+
 ## [0.3.1] - 2026-03-03
 
 ### Security
@@ -63,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Helm quick start guide
 - Remove cloud-specific storage class references from deployment docs
 
-[Unreleased]: https://github.com/rh-aiservices-bu/s4/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/rh-aiservices-bu/s4/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/rh-aiservices-bu/s4/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/rh-aiservices-bu/s4/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/rh-aiservices-bu/s4/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/rh-aiservices-bu/s4/releases/tag/v0.2.2
