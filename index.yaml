@@ -3,6 +3,28 @@ entries:
   s4:
   - apiVersion: v2
     appVersion: 0.3.3
+    created: "2026-03-06T23:29:59.429333046Z"
+    description: S4 (Super Simple Storage Service) - A lightweight S3-compatible storage
+      solution
+    digest: 168d55653ce05be1c96de83582bf86eb8fcb276ad5958e2e0fc215679e775ee7
+    home: https://github.com/rh-aiservices-bu/s4
+    keywords:
+    - s3
+    - storage
+    - object-storage
+    - ceph
+    - rgw
+    maintainers:
+    - name: Red Hat AI Services BU
+    name: s4
+    sources:
+    - https://github.com/rh-aiservices-bu/s4
+    type: application
+    urls:
+    - https://github.com/MindTooth/s4/releases/download/v0.1.2/s4-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.3.3
     created: "2026-03-06T21:27:27.178013639Z"
     description: S4 (Super Simple Storage Service) - A lightweight S3-compatible storage
       solution
@@ -23,4 +45,4 @@ entries:
     urls:
     - https://github.com/MindTooth/s4/releases/download/s4-0.1.0/s4-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-06T21:27:27.178019279Z"
+generated: "2026-03-06T23:29:59.429341141Z"
